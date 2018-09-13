@@ -1,37 +1,21 @@
+// PLEASE DON'T change function name
 module.exports = function makeExchange(currency) {
-    var mon = {};  // it is bad name for an object... And I know it
-    var remainder;
-    remainder = currency;
-
-    if (currency == false) return mon;
-
-    if (currency > 10000) return {error: "You are rich, my friend! We don't have so much coins for exchange"};
-
-    if (remainder >= 50) {
-        mon.H = Math.floor(remainder/50);
-        remainder = remainder - mon.H * 50;
-    }
-
-    if (remainder >= 25) {
-        mon.Q = Math.floor(remainder/25);
-        remainder = remainder - mon.Q * 25;
-    }
-
-    if (remainder >= 10) {
-        mon.D = Math.floor(remainder/10);
-        remainder = remainder - mon.D * 10;
-    }
-
-    if (remainder >= 5) {
-        mon.N = Math.floor(remainder/5);
-        remainder = remainder - mon.N * 5;
-    }
-
-    if (remainder >= 1) {
-        mon.P = remainder;
-
-    }
-
-    return mon;
-
-}
+    // 50¢, 25¢, 10¢, 5¢ and 1¢  H, Q, D, N and P
+        var obj = {};
+        if (currency <= 0) return obj;
+        if (currency > 10000) return {error: "You are rich, my friend! We don't have so much coins for exchange"};
+        var h = Math.floor(currency / 50);
+          if (h) obj.H = h;
+        var rest = currency - h * 50;
+        var q = Math.floor(rest / 25);
+          if (q) obj.Q = q;
+        rest = rest - q * 25;
+        var d = Math.floor(rest / 10);
+          if (d) obj.D = d;
+        rest = rest - d * 10;
+        var n = Math.floor(rest / 5);
+          if (n) obj.N = n;
+        p = rest - n * 5;
+          if (p) obj.P = p;
+      return obj;
+  }
